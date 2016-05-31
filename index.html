@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>EECS 499 Data Warehouse Web</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+	<!-- Load AngularJS and JQuery -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+	<!-- Load bootstrap core CSS/JS -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+	<!-- Load custom CSS and JavaScript -->
+	<link type="text/css" rel="stylesheet" href="css/myCss.css"  media="screen,projection"/>
+	<script type="text/javascript" language="javascript" src="js/myJs.js"></script>
+	<script type="text/javascript" src="js/IndexCtrl.js"></script>
+</head>
+
+<body>
+
+<div classs="row" style="margin-top:30px">
+	<div class="col-sm-2"></div>
+	<div class="col-sm-8">
+		<div class="panel-group">
+			<!-- This is panel for select -->
+			<div class="panel panel-default">
+				<div class="panel-heading"><h4>Select</h4></div>
+  				<div class="panel-body">
+  					<div class="margin-left-50">
+						<label class="checkbox-inline"><input type="checkbox" name="test" id="Employee ID" value="Employee ID">Employee ID</label>
+						<label class="checkbox-inline"><input type="checkbox" name="test" id="Program" value="Program">Program</label>
+						<label class="checkbox-inline"><input type="checkbox" name="test" id="Gender" value="Gender">Gender</label>
+						<label class="checkbox-inline"><input type="checkbox" name="test" id="Ethnicity" value="Ethnicity">Ethnicity</label>
+						<label class="checkbox-inline"><input type="checkbox" name="test" id="Country of Citizenship" value="Country of Citizenship">Country of Citizenship</label>
+					</div>
+  				</div><!-- This is panel for select -->
+
+					<!-- This is panel for filter -->
+  				<div class="panel-heading"><h4>Filter</h4></div>
+  				<div class="panel-body margin-left-30" style="margin-bottom:20px">
+
+
+  					<div class="container-fluid" id= "Clauses">
+						<div class= "well" id="well0">
+						<div class= "row" style="margin-bottom:6px">
+						<div class= "col-sm-1">
+						</div>
+  						<div class= "col-sm-4">
+							<select class="form-control" id="selAttr00">
+								<option>GRE Analytical Writing</option>
+								<option>GRE Verbal</option>
+								<option>GRE Quantitative</option>
+							</select>
+						</div>
+						<div class= "col-sm-1">
+							<select class="form-control" id="selMath00">
+								<option>></option>
+								<option><</option>
+								<option>=</option>
+								<option>>=</option>
+								<option><=</option>
+							</select>
+						</div>
+						<div class= "col-sm-2">
+							<select class="form-control" id="selLog00">
+								<option>value</option>
+								<option>sum</option>
+								<option>avg</option>
+								<option>min</option>
+								<option>max</option>
+							</select>
+						</div>
+						<div class= "col-sm-2">
+							<input type="text" class="form-control" id="attValue00">
+						</div>
+						<div class= "col-sm-1">
+								<button class="btn btn-default btn-md" id="or0" ><span class="glyphicon glyphicon-plus"></span>&nbsp OR
+								</button>
+						</div>
+						</div>
+						</div>
+					</div>
+
+					<div class="row" style="margin:auto">
+							<div class="col-md-12" id="and">
+									<button class="btn btn-default btn-block" id="addAND" onclick="addAND()">
+										<span class="glyphicon glyphicon-plus"></span>&nbsp AND
+									</button>
+							</div>
+					</div>
+
+					<div class="row" style="margin:20px 1px 20px 1px">
+							<div class="col-md-6">
+								<button type="button" class="btn btn-default btn-block" id="View" onclick="View()">
+									<span class="glyphicon glyphicon-saved"></span> View Predictions
+								</button>
+							</div>
+							<div class="col-md-6" id="and">
+								<button class="btn btn-default btn-block" id="Search">
+									<span class="glyphicon glyphicon-search"></span>&nbsp Search
+								</button>
+							</div>
+					</div>
+					
+					<div class="well" style="margin:20px 17px 0 17px">
+						<div class="row" style="margin:auto" >
+							<div class="col-md-1"></div>
+							<div id="prediction"></div>
+						</div>
+					</div>
+  			</div><!-- This is panel for filter -->
+
+				<div class="panel-heading"><h4>Result</h4></div>
+  				<div class="panel-body">
+<!--   					<table class="table table-bordered " style="text-align:center">
+					    <thead>
+					      <tr>
+					        <th style="text-align:center">test1</th>
+					        <th style="text-align:center">test2</th>
+					        <th style="text-align:center">test3</th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					      <tr>
+					        <td>John</td>
+					        <td>Doe</td>
+					        <td>john@example.com</td>
+					      </tr>
+					      <tr>
+					        <td>Mary</td>
+					        <td>Moe</td>
+					        <td>mary@example.com</td>
+					      </tr>
+					      <tr>
+					        <td>July</td>
+					        <td>Dooley</td>
+					        <td>july@example.com</td>
+					      </tr>
+					    </tbody>
+					  </table> -->
+  				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+</body>
+</html>
