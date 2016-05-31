@@ -17,7 +17,6 @@
 	<!-- Load custom CSS and JavaScript -->
 	<link type="text/css" rel="stylesheet" href="css/myCss.css"  media="screen,projection"/>
 	<script type="text/javascript" language="javascript" src="js/myJs.js"></script>
-	<script type="text/javascript" src="js/IndexCtrl.js"></script>
 </head>
 
 <body>
@@ -100,7 +99,7 @@
 								</button>
 							</div>
 							<div class="col-md-6" id="and">
-								<button class="btn btn-default btn-block" id="Search">
+								<button class="btn btn-default btn-block" id="Search" onclick="Search()">
 									<span class="glyphicon glyphicon-search"></span>&nbsp Search
 								</button>
 							</div>
@@ -116,40 +115,19 @@
 
 				<div class="panel-heading"><h4>Result</h4></div>
   				<div class="panel-body">
-<!--   					<table class="table table-bordered " style="text-align:center">
+  					<table class="table table-bordered " style="text-align:center">
 					    <thead>
-					      <tr>
-					        <th style="text-align:center">test1</th>
-					        <th style="text-align:center">test2</th>
-					        <th style="text-align:center">test3</th>
+					      <tr id="title">
 					      </tr>
 					    </thead>
-					    <tbody>
-					      <tr>
-					        <td>John</td>
-					        <td>Doe</td>
-					        <td>john@example.com</td>
-					      </tr>
-					      <tr>
-					        <td>Mary</td>
-					        <td>Moe</td>
-					        <td>mary@example.com</td>
-					      </tr>
-					      <tr>
-					        <td>July</td>
-					        <td>Dooley</td>
-					        <td>july@example.com</td>
-					      </tr>
+					    <tbody id="body">
 					    </tbody>
-					  </table> -->
+					  </table>
   				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
-
-
 
 </body>
 </html>

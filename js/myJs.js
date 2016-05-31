@@ -1,3 +1,17 @@
+/*
+
+Query Details:
+    select: @attrRes  string;
+    where: @res   string;
+
+Expected return value:
+    result: @column[number of instances][number of attributes]   array of arrays; 
+
+*/
+
+
+
+
 
 var checkAttr = [];
 
@@ -155,19 +169,22 @@ function addAND() {
 }
 
 var res = "";
-var attrRes = "Select ( ";
+var attrRes = " ( ";
 
 function View() {
 
-    var attrRes = "Select ( ";
+    checkAttr = [];
 
+    var attrRes = " ( ";
+
+    $("#title").empty();
+ 
     $("input:checkbox[name=test]:checked").each(function () {
         checkAttr.push($(this).val());
+        var tempAttr =  $(this).val();
+        
+        attrRes = attrRes + tempAttr + " ";
     });
-
-    for (k=0;k<checkAttr.length;k++) {
-      attrRes = attrRes + checkAttr[k] + " ";
-    }  
 
     attrRes = attrRes + ")"
 
@@ -196,6 +213,42 @@ function View() {
     }
     res = res.substring(4)
     console.log(res);
-    $("#prediction").html("<br>" + attrRes + "<br> Where " + res);
+    $("#prediction").html("<br> Select" + attrRes + "<br> Where " + res);
 }
 
+
+
+var column = []; 
+column.push(["test01","test02","test03","test04","test05"]);
+column.push(["test11","test12","test13","test14","test15"]);
+column.push(["test21","test22","test23","test24","test25"]);
+column.push(["test31","test32","test33","test34","test35"]);
+column.push(["test41","test42","test43","test44","test45"]);
+
+
+function Search() {
+
+  var people = column.length;
+
+  console.log(checkAttr.length);
+  
+  for (p=0;p<checkAttr.length;p++) {
+
+    var tempTitle = $(`<th style="text-align:center">`+checkAttr[p]+`</th>`);
+    $("#title").append(tempTitle);
+  }
+
+  for (m=0;m<people;m++){
+    var tempBody = "<tr>";
+    for (q=0;q<checkAttr.length;q++) {
+      console.log(column[m][q]);
+      tempBody = tempBody + "<td>" + column[m][q] + "</td>";
+      console.log(tempBody);
+      // $("body1").append(tempBody);
+    }
+    tempBody = tempBody + "</tr>";
+    // console.log(tempBody);
+    $("#body").append(tempBody);
+  }
+
+}
