@@ -178,7 +178,7 @@ function View() {
 
     var attrRes = " ( ";
 
-    $("#title").empty();
+    
  
     $("input:checkbox[name=test]:checked").each(function () {
         checkAttr.push($(this).val());
@@ -229,6 +229,9 @@ column.push({EmployeeID: "005", Program: "CS", Gender: "Male"  , Ethnicity: "Asi
 
 function Search() {
 
+  $("#title").empty();
+  $("#body").empty();
+  
   var people = column.length;
 
   console.log(checkAttr.length);
