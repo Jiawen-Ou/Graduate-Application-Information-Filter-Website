@@ -5,7 +5,8 @@ Query Details:
     where: @res   string;
 
 Expected return value:
-    result: @column[number of instances][number of attributes]   array of arrays; 
+    result: @column[number of instances][attributes]   array of arrays;  
+            see example in line 221
 
 */
 
@@ -219,11 +220,11 @@ function View() {
 
 
 var column = []; 
-column.push(["test01","test02","test03","test04","test05"]);
-column.push(["test11","test12","test13","test14","test15"]);
-column.push(["test21","test22","test23","test24","test25"]);
-column.push(["test31","test32","test33","test34","test35"]);
-column.push(["test41","test42","test43","test44","test45"]);
+column.push({EmployeeID: "001", Program: "EE", Gender: "Male"  , Ethnicity: "White", CountryofCitizenship: "Korea"});
+column.push({EmployeeID: "002", Program: "CS", Gender: "Female", Ethnicity: "Black", CountryofCitizenship: "China"});
+column.push({EmployeeID: "003", Program: "CE", Gender: "Female", Ethnicity: "Asian", CountryofCitizenship: "Inida"});
+column.push({EmployeeID: "004", Program: "EE", Gender: "Male"  , Ethnicity: "White", CountryofCitizenship: "United States"});
+column.push({EmployeeID: "005", Program: "CS", Gender: "Male"  , Ethnicity: "Asian", CountryofCitizenship: "Iran"});
 
 
 function Search() {
@@ -242,7 +243,7 @@ function Search() {
     var tempBody = "<tr>";
     for (q=0;q<checkAttr.length;q++) {
       console.log(column[m][q]);
-      tempBody = tempBody + "<td>" + column[m][q] + "</td>";
+      tempBody = tempBody + "<td>" + column[m][checkAttr[q]] + "</td>";
       console.log(tempBody);
       // $("body1").append(tempBody);
     }
