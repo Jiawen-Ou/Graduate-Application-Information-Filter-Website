@@ -5,14 +5,10 @@ Query Details:
     where: @res   string;
 
 Expected return value:
-    result: @column[number of instances][attributes]   array of arrays;  
+    result: @pong[number of instances][attributes]   array of arrays;  
             see example in line 221
 
 */
-
-
-
-
 
 var checkAttr = [];
 
@@ -171,24 +167,28 @@ function addAND() {
 
 var res = "";
 var attrRes = " ( ";
+var ping = ""
+var table = "GRE_Query"
 
 function View() {
 
     checkAttr = [];
 
-    var attrRes = " ( ";
-
-    
- 
+    var attrRes = " ";
+    var cnt = 0;
     $("input:checkbox[name=test]:checked").each(function () {
         checkAttr.push($(this).val());
         var tempAttr =  $(this).val();
-        
-        attrRes = attrRes + tempAttr + " ";
+        if (cnt == 0) {
+          attrRes = attrRes + tempAttr;
+          cnt += 1;
+        } else {
+          attrRes = attrRes + ", " + tempAttr;
+          cnt += 1;
+        }
     });
 
-    attrRes = attrRes + ")"
-
+    attrRes = attrRes
     res = "";
     for (i=0;i<=count;i++) {
       res = res + " AND (";
@@ -214,45 +214,81 @@ function View() {
     }
     res = res.substring(4)
     console.log(res);
-    $("#prediction").html("<br> Select" + attrRes + "<br> Where " + res);
+
+    ping = "SELECT" + attrRes + " FROM " + table + " WHERE " + res
+
+    $("#prediction").html(ping);
 }
 
+// var pong = [];
 
-
-var column = []; 
-column.push({EmployeeID: "001", Program: "EE", Gender: "Male"  , Ethnicity: "White", CountryofCitizenship: "Korea"});
-column.push({EmployeeID: "002", Program: "CS", Gender: "Female", Ethnicity: "Black", CountryofCitizenship: "China"});
-column.push({EmployeeID: "003", Program: "CE", Gender: "Female", Ethnicity: "Asian", CountryofCitizenship: "Inida"});
-column.push({EmployeeID: "004", Program: "EE", Gender: "Male"  , Ethnicity: "White", CountryofCitizenship: "United States"});
-column.push({EmployeeID: "005", Program: "CS", Gender: "Male"  , Ethnicity: "Asian", CountryofCitizenship: "Iran"});
+// function Ping2Pong(ping) {
+//   pong.push({EmployID: "001", Program: "EE", Gender: "Male"  , Ethnicity: "White", Country: "Korea"});
+//   pong.push({EmployID: "002", Program: "CS", Gender: "Female", Ethnicity: "Black", Country: "China"});
+//   pong.push({EmployID: "003", Program: "CE", Gender: "Female", Ethnicity: "Asian", Country: "Inida"});
+//   pong.push({EmployID: "004", Program: "EE", Gender: "Male"  , Ethnicity: "White", Country: "United States"});
+//   pong.push({EmployID: "005", Program: "CS", Gender: "Male"  , Ethnicity: "Asian", Country: "Iran"});  
+// }
 
 
 function Search() {
-
   $("#title").empty();
   $("#body").empty();
-  
-  var people = column.length;
-
-  console.log(checkAttr.length);
-  
-  for (p=0;p<checkAttr.length;p++) {
-
-    var tempTitle = $(`<th style="text-align:center">`+checkAttr[p]+`</th>`);
-    $("#title").append(tempTitle);
-  }
-
-  for (m=0;m<people;m++){
-    var tempBody = "<tr>";
-    for (q=0;q<checkAttr.length;q++) {
-      console.log(column[m][q]);
-      tempBody = tempBody + "<td>" + column[m][checkAttr[q]] + "</td>";
-      console.log(tempBody);
-      // $("body1").append(tempBody);
+  if (ping == "") {
+    document.getElementById("txtHint").innerHTML = "";
+    return;
+  } else {
+    if (window.XMLHttpRequest) {
+        // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    } else {
+        // code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
-    tempBody = tempBody + "</tr>";
-    // console.log(tempBody);
-    $("#body").append(tempBody);
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+          document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+      }
+    };
+    xmlhttp.open("GET", "../connector/mysql-connector-to-schema-eecs_499.php?q=" + ping, true);
+    xmlhttp.send(); 
   }
-
 }
+
+// function Search() {
+
+//   $("#title").empty();
+//   $("#body").empty();
+  
+//   pong = $.ajax({
+//     method: "GET",
+//     url: "../mysql-connector-to-schema-eecs_499/py",
+//     dataType: "script"
+//   })
+//   // Ping2Pong(ping)
+
+//   var people = pong.length;
+
+//   console.log(checkAttr.length);
+  
+//   for (p=0;p<checkAttr.length;p++) {
+
+//     var tempTitle = $(`<th style="text-align:center">`+checkAttr[p]+`</th>`);
+//     $("#title").append(tempTitle);
+//   }
+
+//   for (m=0;m<people;m++){
+//     var tempBody = "<tr>";
+//     for (q=0;q<checkAttr.length;q++) {
+//       console.log(pong[m][q]);
+//       tempBody = tempBody + "<td>" + pong[m][checkAttr[q]] + "</td>";
+//       console.log(tempBody);
+//       // $("body1").append(tempBody);
+//     }
+//     // tempBody = tempBody + "</tr>";
+//     tempBody = tempBody + pong;
+//     // console.log(tempBody);
+//     $("#body").append(tempBody);
+//   }
+
+// }
