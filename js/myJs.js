@@ -1,15 +1,3 @@
-/*
-
-Query Details:
-    select: @attrRes  string;
-    where: @res   string;
-
-Expected return value:
-    result: @pong[number of instances][attributes]   array of arrays;  
-            see example in line 221
-
-*/
-
 var checkAttr = [];
 
 var countArray = [];
@@ -25,9 +13,9 @@ $(document).ready(function(){
       </div>
       <div class="col-sm-4">
           <select class="form-control" id=selAttr0`+firstcount+`>
-              <option>GRE Analytical Writing</option>
-              <option>GRE Verbal</option>
-              <option>GRE Quantitative</option>
+              <option>Gre_Writing</option>
+              <option>Gre_verbal</option>
+              <option>Gre_quan</option>
           </select>
       </div>
       <div class="col-sm-1">
@@ -80,9 +68,9 @@ function addAND() {
         </div>
         <div class="col-sm-4">
             <select class="form-control" id=selAttr`+count+`0>
-                <option>GRE Analytical Writing</option>
-                <option>GRE Verbal</option>
-                <option>GRE Quantitative</option>
+                <option>Gre_Writing</option>
+                <option>Gre_verbal</option>
+                <option>Gre_quan</option>
             </select>
         </div>
         <div class="col-sm-1">
@@ -126,29 +114,30 @@ function addAND() {
       </div>
       <div class="col-sm-4">
           <select class="form-control" id=selAttr`+temp+smallcount+`>
-              <option>GRE Analytical Writing</option>
-              <option>GRE Verbal</option>
-              <option>GRE Quantitative</option>
+            <option></option>
+            <option>Gre_Writing</option>
+            <option>Gre_verbal</option>
+            <option>Gre_quan</option>
           </select>
       </div>
       <div class="col-sm-1">
           <select class="form-control" id=selMath`+temp+smallcount+`>
-              <option>></option>
-              <option>
-                  <</option>
-                      <option>=</option>
-                      <option>>=</option>
-                      <option>
-                          <=</option>
+            <option></option>
+            <option>></option>
+            <option><</option>
+            <option>=</option>
+            <option>>=</option>
+            <option><=</option>
           </select>
       </div>
       <div class="col-sm-2">
           <select class="form-control" id=selLog`+temp+smallcount+`>
-              <option>value</option>
-              <option>sum</option>
-              <option>avg</option>
-              <option>min</option>
-              <option>max</option>
+            <option></option>
+            <option>value</option>
+            <option>sum</option>
+            <option>avg</option>
+            <option>min</option>
+            <option>max</option>
           </select>
       </div>
       <div class="col-sm-2">
@@ -166,15 +155,28 @@ function addAND() {
 }
 
 var res = "";
-var attrRes = " ( ";
-var ping = ""
-var table = "GRE_Query"
+var attrRes = "";
+var ping = "";
+var table = "GRE_Query";
+var method = "";
 
-function View() {
+function Clear() {
+  checkAttr = [];
+  countArray = [];
+  res = "";
+  attrRes = "";
+  ping = "";
+  method = "";
+  $("#Search").empty();
+  $("#title").empty();
+  $("#body").empty();
+}
 
+function Search() {
+    Clear();
     checkAttr = [];
-
-    var attrRes = " ";
+    attrRes = " ";
+    method = "Search";
     var cnt = 0;
     $("input:checkbox[name=test]:checked").each(function () {
         checkAttr.push($(this).val());
@@ -216,9 +218,19 @@ function View() {
     console.log(res);
 
     ping = "SELECT" + attrRes + " FROM " + table + " WHERE " + res;
-    // ping = "SELECT EmployID, Program, Gender, Ethnicity, Country FROM GRE_Query WHERE Gre_verbal > 160 AND Gre_quan > 100";
+    console.log(res);
+    $("#Search").html(ping);
+
+    tableHead = "";
+    for ($idx = 0; $idx < checkAttr.length; $idx++) {
+      tableHead = tableHead + "<th>";
+      tableHead = tableHead + checkAttr[$idx];
+      tableHead = tableHead + "</th>";
+    }
+    $("#title").html(tableHead);
+
     if (ping == "") {
-      document.getElementById("txtHint").innerHTML = "";
+      document.getElementById("body").innerHTML = "";
       return;
     } else {
       if (window.XMLHttpRequest) {
@@ -230,87 +242,10 @@ function View() {
       }
       xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+            document.getElementById("body").innerHTML = xmlhttp.responseText;
         }
       };
-      xmlhttp.open("GET", "connector/mysql-connector-to-schema-eecs_499.php?ping=" + ping, true);
-      // xmlhttp.open("GET", "js/yuanhui.txt", true);
+      xmlhttp.open("GET", "connector/mysql-connector-to-schema-eecs_499.php?ping=" + ping + "&method=" + method, true);
       xmlhttp.send(); 
     }
-    $("#prediction").html(ping);
 }
-
-// var pong = [];
-
-// function Ping2Pong(ping) {
-//   pong.push({EmployID: "001", Program: "EE", Gender: "Male"  , Ethnicity: "White", Country: "Korea"});
-//   pong.push({EmployID: "002", Program: "CS", Gender: "Female", Ethnicity: "Black", Country: "China"});
-//   pong.push({EmployID: "003", Program: "CE", Gender: "Female", Ethnicity: "Asian", Country: "Inida"});
-//   pong.push({EmployID: "004", Program: "EE", Gender: "Male"  , Ethnicity: "White", Country: "United States"});
-//   pong.push({EmployID: "005", Program: "CS", Gender: "Male"  , Ethnicity: "Asian", Country: "Iran"});  
-// }
-
-// <script>
-// function Search() {
-//   $("#title").empty();
-//   $("#body").empty();
-//   if (ping == "") {
-//     document.getElementById("txtHint").innerHTML = "";
-//     return;
-//   } else {
-//     if (window.XMLHttpRequest) {
-//         // code for IE7+, Firefox, Chrome, Opera, Safari
-//         xmlhttp = new XMLHttpRequest();
-//     } else {
-//         // code for IE6, IE5
-//         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-//     }
-//     xmlhttp.onreadystatechange = function() {
-//       if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-//           document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
-//       }
-//     };
-//     // xmlhttp.open("GET", "../connector/mysql-connector-to-schema-eecs_499.php?ping=" + ping, true);
-//     xmlhttp.open("GET", "README.md", true);
-//     xmlhttp.send(); 
-//   }
-// }
-// </script>
-
-// function Search() {
-
-//   $("#title").empty();
-//   $("#body").empty();
-  
-//   pong = $.ajax({
-//     method: "GET",
-//     url: "../mysql-connector-to-schema-eecs_499/py",
-//     dataType: "script"
-//   })
-//   // Ping2Pong(ping)
-
-//   var people = pong.length;
-
-//   console.log(checkAttr.length);
-  
-//   for (p=0;p<checkAttr.length;p++) {
-
-//     var tempTitle = $(`<th style="text-align:center">`+checkAttr[p]+`</th>`);
-//     $("#title").append(tempTitle);
-//   }
-
-//   for (m=0;m<people;m++){
-//     var tempBody = "<tr>";
-//     for (q=0;q<checkAttr.length;q++) {
-//       console.log(pong[m][q]);
-//       tempBody = tempBody + "<td>" + pong[m][checkAttr[q]] + "</td>";
-//       console.log(tempBody);
-//       // $("body1").append(tempBody);
-//     }
-//     // tempBody = tempBody + "</tr>";
-//     tempBody = tempBody + pong;
-//     // console.log(tempBody);
-//     $("#body").append(tempBody);
-//   }
-
-// }
