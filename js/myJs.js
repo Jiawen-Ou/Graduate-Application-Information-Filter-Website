@@ -13,29 +13,30 @@ $(document).ready(function(){
       </div>
       <div class="col-sm-4">
           <select class="form-control" id=selAttr0`+firstcount+`>
-              <option>Gre_Writing</option>
-              <option>Gre_verbal</option>
-              <option>Gre_quan</option>
+            <option></option>
+            <option>Gre_verbal</option>
+            <option>Gre_quan</option>
+            <option>Gre_Writing</option>
           </select>
       </div>
       <div class="col-sm-1">
           <select class="form-control" id=selMath0`+firstcount+`>
-              <option>></option>
-              <option>
-                  <</option>
-                      <option>=</option>
-                      <option>>=</option>
-                      <option>
-                          <=</option>
+            <option></option>
+            <option>></option>
+            <option><</option>
+            <option>=</option>
+            <option>>=</option>
+            <option><=</option>
           </select>
       </div>
       <div class="col-sm-2">
           <select class="form-control" id=selLog0`+firstcount+`>
-              <option>value</option>
-              <option>sum</option>
-              <option>avg</option>
-              <option>min</option>
-              <option>max</option>
+            <option></option>
+            <option>value</option>
+            <option>sum</option>
+            <option>avg</option>
+            <option>min</option>
+            <option>max</option>
           </select>
       </div>
       <div class="col-sm-2">
@@ -68,20 +69,20 @@ function addAND() {
         </div>
         <div class="col-sm-4">
             <select class="form-control" id=selAttr`+count+`0>
-                <option>Gre_Writing</option>
-                <option>Gre_verbal</option>
-                <option>Gre_quan</option>
+              <option></option>
+              <option>Gre_verbal</option>
+              <option>Gre_quan</option>
+              <option>Gre_Writing</option>
             </select>
         </div>
         <div class="col-sm-1">
             <select class="form-control" id=selMath`+count+`0>
-                <option>></option>
-                <option>
-                    <</option>
-                        <option>=</option>
-                        <option>>=</option>
-                        <option>
-                            <=</option>
+              <option></option>
+              <option>></option>
+              <option><</option>
+              <option>=</option>
+              <option>>=</option>
+              <option><=</option>
             </select>
         </div>
         <div class="col-sm-2">
@@ -206,7 +207,7 @@ function Search() {
           res1 = res1 + $("#attValue" + i + j).val();
         }
         else {
-          res1 = res1 + " " + $("#selLog" + i + j).val() + "(" + $("#selAttr" + i + j).val() + ")";
+          res1 = res1 + " (SELECT " + $("#selLog" + i + j).val() + "(" + $("#selAttr" + i + j).val() + ") FROM " + table + ") ";
         }
         res1 = res1 + " )"
       }
