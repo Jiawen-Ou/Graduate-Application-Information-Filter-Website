@@ -87,11 +87,12 @@ function addAND() {
         </div>
         <div class="col-sm-2">
             <select class="form-control" id=selLog`+count+`0>
-                <option>value</option>
-                <option>sum</option>
-                <option>avg</option>
-                <option>min</option>
-                <option>max</option>
+              <option></option>
+              <option>value</option>
+              <option>sum</option>
+              <option>avg</option>
+              <option>min</option>
+              <option>max</option>
             </select>
         </div>
         <div class="col-sm-2">
@@ -116,9 +117,9 @@ function addAND() {
       <div class="col-sm-4">
           <select class="form-control" id=selAttr`+temp+smallcount+`>
             <option></option>
-            <option>Gre_Writing</option>
             <option>Gre_verbal</option>
             <option>Gre_quan</option>
+            <option>Gre_Writing</option>
           </select>
       </div>
       <div class="col-sm-1">
@@ -162,12 +163,6 @@ var table = "GRE_Query";
 var method = "";
 
 function Clear() {
-  checkAttr = [];
-  countArray = [];
-  res = "";
-  attrRes = "";
-  ping = "";
-  method = "";
   $("#Search").empty();
   $("#title").empty();
   $("#body").empty();
