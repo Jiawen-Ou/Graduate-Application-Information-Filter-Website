@@ -30,11 +30,11 @@
 				<div class="panel-heading"><h4>Select</h4></div>
   				<div class="panel-body">
   					<div class="margin-left-50">
-						<label class="checkbox-inline"><input type="checkbox" name="test" id="EmployeeID" value="EmployeeID">Employee ID</label>
+						<label class="checkbox-inline"><input type="checkbox" name="test" id="EmployID" value="EmployID">Employee ID</label>
 						<label class="checkbox-inline"><input type="checkbox" name="test" id="Program" value="Program">Program</label>
 						<label class="checkbox-inline"><input type="checkbox" name="test" id="Gender" value="Gender">Gender</label>
 						<label class="checkbox-inline"><input type="checkbox" name="test" id="Ethnicity" value="Ethnicity">Ethnicity</label>
-						<label class="checkbox-inline"><input type="checkbox" name="test" id="CountryofCitizenship" value="CountryofCitizenship">Country of Citizenship</label>
+						<label class="checkbox-inline"><input type="checkbox" name="test" id="Country" value="Country">Country of Citizenship</label>
 					</div>
   				</div><!-- This is panel for select -->
 
@@ -50,13 +50,15 @@
 						</div>
   						<div class= "col-sm-4">
 							<select class="form-control" id="selAttr00">
-								<option>GRE Analytical Writing</option>
-								<option>GRE Verbal</option>
-								<option>GRE Quantitative</option>
+								<option></option>
+								<option>Gre_verbal</option>
+								<option>Gre_quan</option>
+								<option>Gre_Writing</option>
 							</select>
 						</div>
 						<div class= "col-sm-1">
 							<select class="form-control" id="selMath00">
+								<option></option>
 								<option>></option>
 								<option><</option>
 								<option>=</option>
@@ -66,6 +68,7 @@
 						</div>
 						<div class= "col-sm-2">
 							<select class="form-control" id="selLog00">
+								<option></option>
 								<option>value</option>
 								<option>sum</option>
 								<option>avg</option>
@@ -93,14 +96,17 @@
 					</div>
 
 					<div class="row" style="margin:20px 1px 20px 1px">
-							<div class="col-md-6">
-								<button type="button" class="btn btn-default btn-block" id="View" onclick="View()">
-									<span class="glyphicon glyphicon-saved"></span> View Predictions
+							<div class="col-md-12">
+								<button type="button" class="btn btn-default btn-block" id="Clear" onclick="Clear()">
+									<span class="glyphicon glyphicon-saved"></span> Clear
 								</button>
 							</div>
-							<div class="col-md-6" id="and">
-								<button class="btn btn-default btn-block" id="Search" onclick="Search()">
-									<span class="glyphicon glyphicon-search"></span>&nbsp Search
+					</div>
+
+					<div class="row" style="margin:20px 1px 20px 1px">
+							<div class="col-md-12">
+								<button type="button" class="btn btn-default btn-block" id="View" onclick="Search()">
+									<span class="glyphicon glyphicon-search"></span> Search
 								</button>
 							</div>
 					</div>
@@ -108,7 +114,7 @@
 					<div class="well" style="margin:20px 17px 0 17px">
 						<div class="row" style="margin:auto" >
 							<div class="col-md-1"></div>
-							<div id="prediction"></div>
+							<div id="Search"></div>
 						</div>
 					</div>
   			</div><!-- This is panel for filter -->
