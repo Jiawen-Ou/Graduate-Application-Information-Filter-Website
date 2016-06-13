@@ -215,8 +215,28 @@ function View() {
     res = res.substring(4)
     console.log(res);
 
-    ping = "SELECT" + attrRes + " FROM " + table + " WHERE " + res
-
+    ping = "SELECT" + attrRes + " FROM " + table + " WHERE " + res;
+    // ping = "SELECT EmployID, Program, Gender, Ethnicity, Country FROM GRE_Query WHERE Gre_verbal > 160 AND Gre_quan > 100";
+    if (ping == "") {
+      document.getElementById("txtHint").innerHTML = "";
+      return;
+    } else {
+      if (window.XMLHttpRequest) {
+          // code for IE7+, Firefox, Chrome, Opera, Safari
+          xmlhttp = new XMLHttpRequest();
+      } else {
+          // code for IE6, IE5
+          xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+        }
+      };
+      xmlhttp.open("GET", "connector/mysql-connector-to-schema-eecs_499.php?ping=" + ping, true);
+      // xmlhttp.open("GET", "js/yuanhui.txt", true);
+      xmlhttp.send(); 
+    }
     $("#prediction").html(ping);
 }
 
@@ -230,30 +250,32 @@ function View() {
 //   pong.push({EmployID: "005", Program: "CS", Gender: "Male"  , Ethnicity: "Asian", Country: "Iran"});  
 // }
 
-
-function Search() {
-  $("#title").empty();
-  $("#body").empty();
-  if (ping == "") {
-    document.getElementById("txtHint").innerHTML = "";
-    return;
-  } else {
-    if (window.XMLHttpRequest) {
-        // code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp = new XMLHttpRequest();
-    } else {
-        // code for IE6, IE5
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xmlhttp.onreadystatechange = function() {
-      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-          document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
-      }
-    };
-    xmlhttp.open("GET", "../connector/mysql-connector-to-schema-eecs_499.php?q=" + ping, true);
-    xmlhttp.send(); 
-  }
-}
+// <script>
+// function Search() {
+//   $("#title").empty();
+//   $("#body").empty();
+//   if (ping == "") {
+//     document.getElementById("txtHint").innerHTML = "";
+//     return;
+//   } else {
+//     if (window.XMLHttpRequest) {
+//         // code for IE7+, Firefox, Chrome, Opera, Safari
+//         xmlhttp = new XMLHttpRequest();
+//     } else {
+//         // code for IE6, IE5
+//         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+//     }
+//     xmlhttp.onreadystatechange = function() {
+//       if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+//           document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+//       }
+//     };
+//     // xmlhttp.open("GET", "../connector/mysql-connector-to-schema-eecs_499.php?ping=" + ping, true);
+//     xmlhttp.open("GET", "README.md", true);
+//     xmlhttp.send(); 
+//   }
+// }
+// </script>
 
 // function Search() {
 
