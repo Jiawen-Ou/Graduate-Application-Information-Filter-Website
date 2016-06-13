@@ -1,4 +1,5 @@
 import mysql.connector
+import json
 
 try:
 	cnx = mysql.connector.connect(
@@ -17,8 +18,12 @@ except mysql.connector.Error as err:
 else:
 	print("Good connection")
 	cursor = cnx.cursor()
-	cursor.execute('Select Program From GRE_Query Where Gre_verbal > 160 and Gre_quan > 100')
-	for i in cursor:
-		print i
+	cursor.execute('Select * From GRE_Query Where Gre_verbal > 160 and Gre_quan > 100')
+	result = []
+	for i in cursor.fetchall():
+		result += i
+	onFormat = json.dumps(result)
+	print onFormat
 	cursor.close()
 	cnx.close()
+	return "onFormat"
